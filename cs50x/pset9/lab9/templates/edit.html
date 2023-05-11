@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+        <link href="/static/styles.css" rel="stylesheet">
+        <title>Birthdays</title>
+    </head>
+    <body>
+        <div class="jumbotron">
+            <h1>Birthdays</h1>
+        </div>
+        <div class="container">
+            <div class="section">
+
+                <h2>Edit {{ name }}'s Birthday:</h2>
+                <!-- TODO: Create a form for users to submit a name, a month, and a day -->
+                <form action="/edit" method="post" class="btn">
+                    <input type="hidden" name="birthday_id" value="{{ id }}">
+                    <input name="name" autofocus autocomplete="off" placeholder="Name" type="text" value="{{ name }}">
+                    <input type="date" name="birthday" min="1920-01-01" max="2023-12-31" value="2023-{{ month }}-{{ day }}">
+                    <input type="submit">
+                </form>
+                <form action="/" method="get" class="btn">
+                    <input type="submit" value="Cancel">
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

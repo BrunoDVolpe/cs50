@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                document.querySelector('form').addEventListener('submit', function () {
+                    let name = document.querySelector('#name').value;
+                    alert('hello, ' + name);
+                    document.querySelector('#userGreeting').innerHTML = `Hello, ${name}!`; //Coloquei por conta essa linha
+                });
+            });
+        </script>
+        <title>
+            hello, title
+        </title>
+    </head>
+    <body>
+        <form>
+            <input id="name" autocomplete="off" autofocus="on" placeholder="What's your name?" type="text">
+            <input type="submit" value="Greet Me">
+        </form>
+        <p id="userGreeting"></p>
+    </body>
+</html>

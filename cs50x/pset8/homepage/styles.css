@@ -1,0 +1,255 @@
+* {
+    box-sizing: border-box;
+}
+
+p, spam {
+    font-size: 1vw;
+    margin-top: 0;
+    margin-bottom: 1vw;
+}
+
+.img-logo {
+    max-width: 100%;
+    height: auto;
+    padding: 5px;
+}
+
+h1 {
+    font-size: 3vw; /* 2.5 == 40px == ~3% (2.92%) da viewport de 1366px*/
+}
+
+h2 {
+    font-size: 2.3vw; /*2.0 == 32 px 2.34% da viewport de 1366px*/
+}
+
+h3 {
+    font-size: 2vw; /*1.75rem == 28 px 2.05% da viewport de 1366px*/
+}
+
+.carousel-slide {
+    text-align: center;
+    height: 300px;
+    margin-top: 0px;
+    position: relative;
+}
+
+.center {
+    position: absolute;
+    top: 25%;
+    width: 100%;
+    text-align: center;
+}
+
+.dv-logo-table {
+    background-image: url(https://engenhariadellavolpe.com.br/img/logo-dv.png);
+    background-size: cover;
+    height: 130px;
+    width: 130px;
+    float: left;
+    margin-top: -24px;
+}
+
+.dv-logo-table:hover {
+    background-image: url(https://engenhariadellavolpe.com.br/img/logo-dv-hover.png);
+}
+
+.width-50 {
+    display: inline;
+    width: 50%;
+    padding: auto;
+    margin: auto;
+}
+
+.sobre-titulo {
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.margem-lateral {
+    margin: 10px 20px;
+}
+
+.rights {
+    font-size: 12px;
+    text-align: center;
+    padding: auto;
+}
+
+.inline {
+    display: inline-block;
+}
+
+.cell-size {
+    padding: 25px;
+    margin: 0 0 25px 50px;
+}
+
+#footer {
+    margin-block-end: 0px !important;
+    margin-bottom: 0px !important;
+}
+
+.logo-pos {
+    margin: auto;
+}
+
+.cta-contato {
+    text-align: center;
+    font-size: 1.75rem;
+    font-weight: 500;
+    padding: 20px 0;
+    background-color: #febf14;
+}
+
+.a-contato {
+    font-size: 1.75rem;
+}
+
+a.a-contato:link {
+    color:black;
+}
+
+a.a-contato:hover {
+    font-size: 110%;
+}
+
+a.a-contato:active {
+    font-family: verdana;
+}
+
+a.a-contato:visited {
+    color: black;
+}
+
+#img-contato {
+    width: 59%;
+    max-width: 355px;
+}
+
+.p-contato {
+    padding-right: 40%;
+}
+
+form>label, form>textarea {
+    margin-top: 0.5rem;
+    margin-bottom: 0;
+}
+
+.mobile-hide {
+    /*visibility: hidden;*/
+    display: visible;
+}
+
+.especialidades-mobile {
+    visibility: hidden;
+}
+
+/* Use a media query to add a breakpoint at 600px: */
+@media screen and (max-width: 600px) {
+    body, p, spam {
+        font-size: 4vw;
+        margin-top: 0;
+        margin-bottom: 1vw;
+    }
+
+    h1 {
+        font-size: 8vw; /* 2.5 == 40px == ~3% (2.92%) da viewport de 1366px*/
+    }
+
+    h2 {
+        font-size: 5vw; /*2.0 == 32 px 2.34% da viewport de 1366px*/
+    }
+
+    h3 {
+        font-size: 4.5vw; /*1.75rem == 28 px 2.05% da viewport de 1366px*/
+    }
+
+    span>h3 {
+        display: block;
+        font-size: 3.5vw; /*1.75rem == 28 px 2.05% da viewport de 1366px*/
+    }
+
+    .center {
+        position: absolute;
+        top: 2%;
+        width: 100%;
+        text-align: center;
+    }
+
+    .dv-logo-table {
+        background-image: url(https://engenhariadellavolpe.com.br/img/logo-dv.png);
+        background-size: cover;
+        height: 60px;
+        width: 60px;
+        float: left;
+        margin-top: -15px;
+    }
+
+    .col-6{
+        width: 100%;
+        display: block;
+    }
+
+    .m-5 {
+        margin-top:0!important;
+    }
+
+    .cell-size {
+        padding: 0;
+        margin: 0!important;
+        min-height: 60px;
+    }
+
+    .carousel-slide {
+        text-align: center;
+        height: 150px;
+        margin-top: 0px;
+        position: relative;
+    }
+
+    .sobre-titulo {
+        font-weight: bold;
+        font-size: 5.5vw;
+    }
+
+    .row {
+        margin: 0;
+    }
+
+    .mobile-hide {
+        /*visibility: hidden;*/
+        display: none;
+    }
+
+    .especialidades-mobile {
+        visibility: visible;
+        margin-left: 2.5rem;
+    }
+
+    .a-contato {
+        font-size: 4.2vw;
+    }
+
+    .instagram-media {
+        display: block;
+        max-width: 100%;
+        padding-left: 0;
+    }
+
+    .col-6 {
+        max-width: 100%;
+        flex: 100%;
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    .p-contato {
+        padding-right: 0;
+        text-align: center;
+    }
+
+    #mensagem_contato {
+        height: 8em;
+        width: 100%;
+    }
+}

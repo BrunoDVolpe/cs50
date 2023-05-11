@@ -1,0 +1,21 @@
+#Your project must be implemented in Python.
+#Your project must have a main function and three or more additional functions. At least three of those additional
+#  functions must be accompanied by tests that can be executed with pytest.
+#   - Your main function must be in a file called project.py, which should be in the “root” (i.e., top-level folder)
+#  of your project.
+#   - Your 3 required custom functions other than main must also be in project.py and defined at the same indentation
+#  level as main (i.e., not nested under any classes or functions).
+
+#Idéias:
+# - manipulação de dados para analisar leads Sales Kosmos
+# - Automação para enviar convites via Linkedin.
+# - automação para enviar mensagens individuais no whatsapp
+    #wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb Baixando Chrome para Ubuntu
+    #sudo apt install ./google-chrome-stable_current_amd64.deb Instalando Chrome
+    Ambiente do codespace não me deixou baixar o Chrome e preciso para rodar o selenium.
+    Requests também não funcionou.
+# - Calculadora de Frete usando o correios
+# - Simulador de investimento usando txt como banco de dados.
+
+Automação convite Linkedin.
+tk inter para receber a mensagem

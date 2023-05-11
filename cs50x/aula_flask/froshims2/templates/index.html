@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block body %}
+    <h1>Register</h1>
+
+    <form action="/register" method="post">
+        <input name="name" type="text" autocomplete="off" autofocus placeholder="Name">
+        <input name="email" type="email" autocomplete="off" placeholder="Email">
+
+        <!-- versão 2 usando flask para gerar os campos e option -->
+        <select name="sport">
+            <option disabled selected value="">Sport</option>
+            {% for sport in sports %}
+                <option value="{{ sport }}">{{ sport }}</option>
+            {% endfor %}
+        </select>
+
+        <!-- versão 2 usando flask para gerar os campos e input radio -->
+        <!--
+        {% for sport in sports %}
+            <input name="sport" type="radio" value="{{ sport }}">{{ sport }}
+        {% endfor %}
+        -->
+
+        <!-- versão 1 HTML padrão e onde tivemos o hack -->
+        <!--
+        <select name="sport">
+            <option disabled selected value="">Sport</option>
+            <option value="Dodgeball">Dodgeball</option>
+            <option value="Flag Football">Flag Football</option>
+            <option value="Soccer">Soccer</option>
+            <option value="Volleyball">Volleyball</option>
+            <option value="Ultimate Frisbee">Ultimate Frisbee</option>
+        </select>
+        -->
+        <input type="submit" value="Register">
+    </form>
+{% endblock %}

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+        <link href="styles.css" rel="stylesheet">
+        <title>Trivia!</title>
+
+        <script>
+
+            // TODO: Add code to check answers to questions
+            function part1_check(answer){
+                if (answer == 'Python')
+                {
+                    // Mudar para verde e mensagem 'Correto!'
+                    document.querySelector("#python").style.backgroundColor = 'lightgreen';
+                    document.querySelector("#validPart1").innerHTML = 'Correct!';
+                }
+                else
+                {
+                    // Mudar para vermelho e mensagem 'Incorreto!'
+                    document.querySelector(`#${answer}`).style.backgroundColor = 'red';
+                    document.querySelector("#validPart1").innerHTML = 'Incorrect!';
+                }
+            }
+
+            function part2_check(){
+                let answer = document.querySelector('#answerPart2').value;
+                if (answer == 'David Malan' || answer == 'David')
+                {
+                    // Mudar cor para verde e mensagem 'Correct!'
+                    document.querySelector('#answerPart2').style.backgroundColor = 'lightgreen';
+                    document.querySelector("#validPart2").innerHTML = 'Correct!';
+                }
+                else
+                {
+                    // Mudar cor para vermelho e mensagem 'Incorrect!'
+                    document.querySelector('#answerPart2').style.backgroundColor = 'red';
+                    document.querySelector("#validPart2").innerHTML = 'Incorrect!';
+                }
+            }
+
+        </script>
+
+    </head>
+    <body>
+
+        <div class="jumbotron">
+            <h1>Trivia!</h1>
+        </div>
+
+        <div class="container">
+
+            <div class="section">
+                <h2>Part 1: Multiple Choice </h2>
+                <hr>
+
+                <!-- TODO: Add multiple choice question here -->
+                <h3>Which language have I been introducted at UQ back in 2016?</h3>
+                <p id="validPart1"></p>
+                <input type="button" onclick="part1_check('c')" id="c" value="C/C++">
+                <input type="button" onclick="part1_check('html')" id="html" value="HTML, CSS, JavaScript">
+                <input type="button" onclick="part1_check('Python')" id="python" value="Python">
+                <input type="button" onclick="part1_check('java')" id="java" value="Java">
+                <input type="button" onclick="part1_check('sql')" id="sql" value="SQL">
+            </div>
+
+            <div class="section">
+                <h2>Part 2: Free Response</h2>
+                <hr>
+
+                <!-- TODO: Add free response question here -->
+                <h3>What is the name of Harvard CS50's teacher?</h3>
+                <p id="validPart2"></p>
+                <input type='text' id='answerPart2'>
+                <input type="submit" id="submit" onclick="part2_check()" value="Check Answer">
+            </div>
+
+        </div>
+    </body>
+</html>

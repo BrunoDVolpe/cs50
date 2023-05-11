@@ -1,0 +1,12 @@
+sort1 uses: bubble sort
+
+How do you know?: when running a large sorted list, buble works faster than selection sort.
+
+sort2 uses: merge sort
+
+How do you know?: When running random10000.txt the time to execute was much faster that the others.
+
+sort3 uses: selection sort
+
+How do you know?: It's the slowest in ordened list when the list is big (...50000.txt). When in big omega,
+is the slowest.

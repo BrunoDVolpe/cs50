@@ -1,0 +1,108 @@
+sqlite> .schema
+CREATE TABLE crime_scene_reports (
+    id INTEGER,
+    year INTEGER,
+    month INTEGER,
+    day INTEGER,
+    street TEXT,
+    description TEXT,
+    PRIMARY KEY(id)
+);
+CREATE TABLE interviews (
+    id INTEGER,
+    name TEXT,
+    year INTEGER,
+    month INTEGER,
+    day INTEGER,
+    transcript TEXT,
+    PRIMARY KEY(id)
+);
+CREATE TABLE courthouse_security_logs (
+    id INTEGER,
+    year INTEGER,
+    month INTEGER,
+    day INTEGER,
+    hour INTEGER,
+    minute INTEGER,
+    activity TEXT,
+    license_plate TEXT,
+    PRIMARY KEY(id)
+);
+CREATE TABLE atm_transactions (
+    id INTEGER,
+    account_number INTEGER,
+    year INTEGER,
+    month INTEGER,
+    day INTEGER,
+    atm_location TEXT,
+    transaction_type TEXT,
+    amount INTEGER,
+    PRIMARY KEY(id)
+);
+CREATE TABLE bank_accounts (
+    account_number INTEGER,
+    person_id INTEGER,
+    creation_year INTEGER,
+    FOREIGN KEY(person_id) REFERENCES people(id)
+);
+CREATE TABLE airports (
+    id INTEGER,
+    abbreviation TEXT,
+    full_name TEXT,
+    city TEXT,
+    PRIMARY KEY(id)
+);
+CREATE TABLE flights (
+    id INTEGER,
+    origin_airport_id INTEGER,
+    destination_airport_id INTEGER,
+    year INTEGER,
+    month INTEGER,
+    day INTEGER,
+    hour INTEGER,
+    minute INTEGER,
+    PRIMARY KEY(id),
+    FOREIGN KEY(origin_airport_id) REFERENCES airports(id),
+    FOREIGN KEY(destination_airport_id) REFERENCES airports(id)
+);
+CREATE TABLE passengers (
+    flight_id INTEGER,
+    passport_number INTEGER,
+    seat TEXT,
+    FOREIGN KEY(flight_id) REFERENCES flights(id)
+);
+CREATE TABLE phone_calls (
+    id INTEGER,
+    caller TEXT,
+    receiver TEXT,
+    year INTEGER,
+    month INTEGER,
+    day INTEGER,
+    duration INTEGER,
+    PRIMARY KEY(id)
+);
+CREATE TABLE people (
+    id INTEGER,
+    name TEXT,
+    phone_number TEXT,
+    passport_number INTEGER,
+    license_plate TEXT,
+    PRIMARY KEY(id)
+);
+
+Description:
+Theft of the CS50 duck took place at 10:15am at the Chamberlin Street courthouse. Interviews were conducted today with
+three witnesses who were present at the time — each of their interview transcripts mentions the courthouse.
+
+Interviews 28/07/2020 containing courthouse:
+|  name   |                                                                                                                                                       transcript                                                                                                                                                        |
++---------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Ruth    | Sometime within ten minutes of the theft, I saw the thief get into a car in the courthouse parking lot and drive away. If you have security footage from the courthouse parking lot, you might want to look for cars that left the parking lot in that time frame.                                                      |
+| Eugene  | I don't know the thief's name, but it was someone I recognized. Earlier this morning, before I arrived at the courthouse, I was walking by the ATM on Fifer Street and saw the thief there withdrawing some money.                                                                                                      |
+| Raymond | As the thief was leaving the courthouse, they called someone who talked to them for less than a minute. In the call, I heard the thief say that they were planning to take the earliest flight out of Fiftyville tomorrow. The thief then asked the person on the other end of the phone to purchase the flight ticket. |
+
+Notes:
+- Time thief left parking lot: between 10:15 and 10:25
+- Thief withdrawing some money at ATM on Fifer Street before Eugene arrives at courthouse.
+- Witness: Thief calles for less than a minute while leaving the courthouse. They were planning to take the earliest flight out of Fiftyville day 29/07.
+The thief then asked the person on the other end of the phone to purchase the flight ticket.

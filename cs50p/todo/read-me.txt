@@ -1,0 +1,14 @@
+Aplicativo que mostra "to-do list"
+Creation from CS50's seminar
+CS50 2022 - Seminar - Introduction to Node.js: Using Server-Side JavaScript
+Link: https://www.youtube.com/watch?v=Qao10iN0lvU
+Anotações na pasta CS50 - Seminar - Node.js (no meu notebook)
+
+Basicamente ela mostrou como à partir de um site / frontend, vamos mandar uma requisição para o backend, usando o
+ Express Server. O Express Server vai enviar a informação para o banco de dados (SQLite3), vai na sequência fazer a
+ leitura do banco de dados; e retornar para o frontend esta informação.
+ Na página do front (criada pelo PUG), estamos pegando a resposta do banco de dados e exibindo linha por linha através
+  de um for loop.
+
+  Para rodar o projeto, abrir a pasta "todo" no terminal e rodar a aplicação com "npm run dev"
+  (vai rodar um "live server")

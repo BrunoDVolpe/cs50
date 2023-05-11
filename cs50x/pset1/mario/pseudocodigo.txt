@@ -1,0 +1,6 @@
+-> pede o tamanho da pirâmide
+-> confirma se está entre 1 e 8
+--> se não, pede novamente.
+--> Se sim, imprime espaços em branco até o jogo da velha.
+    Lógica: imprime espaço até o número da linha (x) + 1, depois troca por # até completar a largura
+    Vai para a próxima linha e repete até a altura certa.

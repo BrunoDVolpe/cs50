@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+        <link href="/static/styles.css" rel="stylesheet">
+        <title>Birthdays</title>
+    </head>
+    <body>
+        <div class="jumbotron">
+            <h1>Birthdays</h1>
+        </div>
+        <div class="container">
+            <div class="section">
+
+                <h2>Add a Birthday</h2>
+                <!-- TODO: Create a form for users to submit a name, a month, and a day -->
+                <form action="/" method="post">
+                    <input name="name" autofocus autocomplete="off" placeholder="Name" type="text">
+                    <input type="date" name="birthday" min="1920-01-01" max="2023-12-31">
+                    <input type="submit">
+                </form>
+            </div>
+
+            <div class="section">
+
+                <h2>All Birthdays</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Birthday</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- TODO: Loop through the database entries to display them in this table -->
+                        {% for birthday in birthdays %}
+                        <tr>
+                            <td>
+                                {{ birthday.name }}
+                            </td>
+                            <td>
+                                {{ birthday.day }} / {{ birthday.month }}
+                            </td>
+                            <td>
+                                <form action="/edit" method="get">
+                                    <button type="submit" name="birthday_id" value="{{ birthday.id }}" class="btn" title="Edit birthday"><img src="https://cdn-icons-png.flaticon.com/512/1159/1159633.png" alt="edit icon" height="16px" width="16px"/></button>
+                                </form>
+                                <form action="/delete" method="post">
+                                    <button type="submit" name="birthday_id" value="{{ birthday.id }}" class="btn" title="Remove birthday"><img src="https://cdn-icons-png.flaticon.com/512/1214/1214428.png" alt="trash icon" height="16px" width="16px"/></button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>
