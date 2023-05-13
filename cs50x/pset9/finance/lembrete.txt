@@ -4,3 +4,12 @@ API_KEY: pk_91fad41124a3437a8aa5cdaf4ced7b1c
 Usuário: bruno
 Senha: 123
 
+Para rodar:
+- cd cs50x/pset9/finance
+- export API_KEY=pk_91fad41124a3437a8aa5cdaf4ced7b1c
+- flask run
+
+Projeto professores:
+Link: finance.cs50.net
+User: bdvalves
+Senha: bdvalves

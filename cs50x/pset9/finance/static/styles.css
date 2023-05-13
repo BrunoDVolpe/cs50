@@ -61,6 +61,7 @@ td, th {
     border-color: #dee2e6;
     text-align: left;
     padding: 8px;
+    vertical-align: middle;
 }
 
 tr:nth-child(even) {
@@ -86,4 +87,25 @@ input[type='number'] {
 
 li a {
     padding-left: 8px;
+}
+
+h2 {
+    padding: 25px 15px 15px;
+}
+
+.dots {
+    width: 45px;
+}
+
+.vl {
+    border-left-width: 3px;
+    border-left-style: solid;
+    height: 50px;
+    padding: 1;
+    margin: 0 20px;
+}
+
+small {
+    display: inline-block;
+    width: 210px;
 }

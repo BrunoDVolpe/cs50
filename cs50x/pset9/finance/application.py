@@ -1,4 +1,5 @@
 import os
+import re
 
 from cs50 import SQL
 from flask import Flask, flash, redirect, render_template, request, session
@@ -124,13 +125,17 @@ def buy():
         elif len(rows) == 1:
             updated_shares = rows[0]['shares'] + shares
             db.execute("UPDATE wallet SET shares = ? WHERE user_id = ? AND symbol = ?",
-                       session["user_id"], stock['symbol'], updated_shares)
+                       updated_shares, session["user_id"], stock['symbol'])
         else:
             print("wallet rows different from 0 or 1",
                   "which means something wrong in the database or updating process at buy function")
             return apology("Server error", 500)
 
+        # Success message
+        message = "Bought!"
+
         # Redirect user to index / home page
+        flash(message)
         return redirect("/")
 
     # User reached route via GET (as by clicking a link or by redirect)
@@ -196,7 +201,11 @@ def logout():
     # Forget any user_id
     session.clear()
 
+    # Success message
+    message = "Successfully log out."
+
     # Redirect user to login form
+    flash(message)
     return redirect("/")
 
 
@@ -247,6 +256,30 @@ def register():
         elif not request.form.get("confirmation"):
             return apology("must confirm password")
 
+        # Ensure password minimun length
+        if not len(request.form.get("password")) >= 6:
+            return apology("password must contain 6 characters or more")
+
+        # Ensure number
+        matches = re.search(r"\d+", request.form.get("password"))
+        if not matches:
+            return apology("password must contain numbers")
+
+        # Ensure lower case
+        matches = re.search(r"[a-z]+", request.form.get("password"))
+        if not matches:
+            return apology("password must contain lower letters")
+
+        # Ensure upper case
+        matches = re.search(r"[A-Z]+", request.form.get("password"))
+        if not matches:
+            return apology("password must contain upper letters")
+
+        # Ensure symbol
+        matches = re.search(r".+[^0-9a-zA-Z]", request.form.get("password"))
+        if not matches:
+            return apology("password must contain symbols")
+
         # Ensure password == confirm password
         elif request.form.get("password") != request.form.get("confirmation"):
             return apology("Those passwords didn't match. Please, try again.")
@@ -266,7 +299,11 @@ def register():
         rows = db.execute("SELECT * FROM users WHERE username = ?", request.form.get("username"))
         session["user_id"] = rows[0]["id"]
 
+        # Success message
+        message = "Successfully registered!"
+
         # Redirect new user to home page
+        flash(message)
         return redirect("/")
 
     # User reached route via GET (as by clicking a link or via redirect)
@@ -335,7 +372,11 @@ def sell():
         new_cash = cash + int(request.form.get("shares")) * quote["price"]
         db.execute("UPDATE users SET cash = :cash WHERE id = :user_id", cash=new_cash, user_id=session["user_id"])
 
+        # Success message
+        message = "Sold!"
+
         # Redirect user to home / index page
+        flash(message)
         return redirect("/")
 
     # User reached route via GET (as by clicking a link or via redirect)
@@ -346,7 +387,7 @@ def sell():
         return render_template("sell.html", wallet=rows)
 
 
-@app.route("/change_password", methods=["GET", "POST"])
+@app.route("/change-password", methods=["GET", "POST"])
 @login_required
 def change_password():
     """Change user's password"""
@@ -379,12 +420,98 @@ def change_password():
         db.execute("UPDATE users SET hash = :new_hash WHERE id = :id",
                    new_hash=generate_password_hash(request.form.get("new_password")), id=session["user_id"])
 
+        # Success message
+        message = "Password successfully changed."
+
         # Redirect new user to home page
+        flash(message)
         return redirect("/")
 
     # User reached route via GET (as by clicking a link or via redirect)
     else:
-        return render_template("change_password.html")
+        return render_template("change-password.html")
+
+
+@app.route("/manage-money")
+@login_required
+def manage_money():
+    """ Adds cash do user account"""
+
+    # Query database for user's data
+    rows = db.execute("SELECT * FROM users WHERE id = ?", session["user_id"])
+
+    # Get user's cash into usd
+    cash = usd(rows[0]['cash'])
+
+    return render_template("manage-money.html", cash=cash)
+
+
+@app.route("/manage-money/add-cash", methods=["POST"])
+@login_required
+def add_cash():
+    """ Adds cash do user account"""
+
+    # Ensure value was given
+    if not request.form.get("add"):
+        return apology("Missing a value to add")
+
+    # Ensure value matches to currency / is valid
+    matches = re.search(r"^\d*\.?\d?\d?$", request.form.get("add"), flags=0)
+    if not matches:
+        return apology("input not matching with currency")
+
+    # Query database for user's cash
+    rows = db.execute("SELECT * FROM users WHERE id = ?", session["user_id"])
+    cash = rows[0]['cash']
+
+    # Update transactions
+    db.execute("INSERT INTO transactions (user_id, op_type, symbol, company, price, shares) VALUES (?, ?, ?, ?, ?, ?)",
+               session["user_id"], "add", "US$", "USD", float(request.form.get("add")), 0)
+
+    # Add money to user's cash
+    db.execute("UPDATE users SET cash = ? WHERE id = ?", cash + float(request.form.get("add")), session["user_id"])
+
+    # Success message
+    message = "Money added successfully."
+
+    flash(message)
+    return redirect("/")
+
+
+@app.route("/manage-money/withdraw-cash", methods=["GET", "POST"])
+@login_required
+def withdraw_cash():
+    """ Withdraws cash from user account """
+
+    # Ensure value was given
+    if not request.form.get("withdraw"):
+        return apology("Missing a value to withdraw")
+
+    # Ensure value matches to currency / is valid
+    matches = re.search(r"^\d*\.?\d?\d?$", request.form.get("withdraw"), flags=0)
+    if not matches:
+        return apology("input not matching with currency")
+
+    # Query database for user's cash
+    rows = db.execute("SELECT * FROM users WHERE id = ?", session["user_id"])
+    cash = rows[0]['cash']
+
+    # Ensure user has enough balance
+    if float(request.form.get("withdraw")) > cash:
+        return apology("not enough money")
+
+    # Update transactions
+    db.execute("INSERT INTO transactions (user_id, op_type, symbol, company, price, shares) VALUES (?, ?, ?, ?, ?, ?)",
+               session["user_id"], "withdraw", "US$", "USD", float(request.form.get("withdraw")), 0)
+
+    # Add money to user's cash
+    db.execute("UPDATE users SET cash = ? WHERE id = ?", cash - float(request.form.get("withdraw")), session["user_id"])
+
+    # Success message
+    message = "Money withdrawn successfully"
+
+    flash(message)
+    return redirect("/")
 
 
 def errorhandler(e):

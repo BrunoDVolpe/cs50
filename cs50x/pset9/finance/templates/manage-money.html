@@ -1,0 +1,55 @@
+<!-- Page via backend -->
+{% extends 'layout.html' %}
+
+{% block head %}
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelector('#add-cash-tab').addEventListener('click', function () {
+                document.querySelector('#add-cash').classList = "tab-pane fade show active";
+                document.querySelector('#withdraw-cash').classList = "tab-pane fade";
+            });
+
+            document.querySelector('#withdraw-cash-tab').addEventListener('click', function () {
+                document.querySelector('#add-cash').classList = "tab-pane fade";
+                document.querySelector('#withdraw-cash').classList = "tab-pane fade show active";
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block title %} Manage Money {% endblock %}
+
+{% block main %}
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="add-cash-tab" data-bs-toggle="tab" data-bs-target="#add-cash" type="button" role="tab" aria-controls="add-cash" aria-selected="true">Add Cash</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="withdraw-cash-tab" data-bs-toggle="tab" data-bs-target="#withdraw-cash" type="button" role="tab" aria-controls="withdraw-cash" aria-selected="false">Withdraw Cash</button>
+    </li>
+  </ul>
+  <div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="add-cash" role="tabpanel" aria-labelledby="add-cash-tab">
+        <!-- Add Cash Content -->
+        <h2>Add cash to your account</h2>
+        <h3>Balance: {{ cash }}</h3>
+        <form action="/manage-money/add-cash" method="post">
+            <div class="form-group">
+                <input autofocus autocomplete="off" class="form-control" name="add" placeholder="$" type="number" step="0.01" min="0.01">
+            </div>
+            <button class="btn btn-primary" type="submit">Add Cash</button>
+        </form>
+    </div>
+    <div class="tab-pane fade" id="withdraw-cash" role="tabpanel" aria-labelledby="withdraw-cash-tab">
+        <!-- Withdraw Cash Content -->
+        <h2>Withdraw cash from your account</h2>
+        <h3>Balance: {{ cash }}</h3>
+        <form action="/manage-money/withdraw-cash" method="post">
+            <div class="form-group">
+                <input autofocus autocomplete="off" class="form-control" name="withdraw" placeholder="$" type="number" step="0.01" min="0.01">
+            </div>
+            <button class="btn btn-primary" type="submit">Withdraw Cash</button>
+        </form>
+    </div>
+  </div>
+{% endblock %}
